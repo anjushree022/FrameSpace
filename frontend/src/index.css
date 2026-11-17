@@ -1,0 +1,198 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* =================================
+     LIGHT THEME - NATURAL MINIMAL
+  ================================= */
+
+  :root {
+    --paper: 245 245 239;
+    --sand: 218 222 210;
+    --line: 211 217 202;
+
+    --ink: 52 78 65;
+    --mute: 104 118 107;
+    --surface: 255 255 255;
+
+    /* Sage green accent */
+    --cyano: 123 143 103;
+    --cyano-dark: 79 105 79;
+    --cyano-soft: 232 237 224;
+    --cyano-text: 79 105 79;
+
+    --danger: 185 28 28;
+    --danger-soft: 254 242 242;
+
+    /* Logo colors */
+    --logo-primary: 52 78 65;
+    --logo-accent: 123 143 103;
+  }
+
+  /* =================================
+     DARK THEME - DEEP FOREST
+  ================================= */
+
+  .dark {
+    color-scheme: dark;
+
+    --paper: 25 32 28;
+    --sand: 39 49 42;
+    --line: 64 77 66;
+
+    --ink: 232 237 224;
+    --mute: 164 177 160;
+    --surface: 32 41 35;
+
+    --cyano: 163 177 138;
+    --cyano-dark: 184 197 158;
+    --cyano-soft: 47 61 47;
+    --cyano-text: 184 197 158;
+
+    --danger: 248 113 113;
+    --danger-soft: 68 35 32;
+
+    /* Logo colors */
+    --logo-primary: 232 237 224;
+    --logo-accent: 163 177 138;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper font-display text-ink antialiased transition-colors duration-200;
+  }
+
+  ::selection {
+    background: rgb(var(--cyano));
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--cyano-text));
+    outline-offset: 2px;
+  }
+
+  img {
+    -webkit-user-drag: none;
+  }
+}
+
+/* =================================
+   REUSABLE COMPONENT STYLES
+================================= */
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-ink text-paper hover:bg-cyano hover:text-white;
+  }
+
+  .btn-accent {
+    @apply bg-cyano text-white hover:bg-cyano-dark;
+  }
+
+  .btn-outline {
+    @apply border border-line bg-surface/60 text-ink hover:border-ink;
+  }
+
+  .btn-ghost {
+    @apply text-ink hover:bg-sand;
+  }
+
+  .btn-danger {
+    @apply bg-red-700 text-white hover:bg-red-800;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm text-ink placeholder:text-mute/70 outline-none transition focus:border-cyano focus:ring-2 focus:ring-cyano/20;
+  }
+
+  .field-error {
+    @apply border-danger focus:border-danger focus:ring-danger/20;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-medium;
+  }
+
+  .error-text {
+    @apply mt-1.5 text-xs text-danger;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-line bg-surface/70 px-3.5 py-1.5 text-sm text-ink/80 transition-colors hover:border-ink hover:text-ink;
+  }
+
+  .chip-active {
+    @apply border-ink bg-ink text-paper hover:text-paper;
+  }
+
+  /* Logo color utilities */
+  .logo-primary {
+    color: rgb(var(--logo-primary));
+  }
+
+  .logo-accent {
+    color: rgb(var(--logo-accent));
+  }
+}
+
+/* =================================
+   ANIMATIONS
+================================= */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.toast-in {
+  animation: toast-in 0.25s ease-out both;
+}
+
+/* =================================
+   ACCESSIBILITY
+================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .toast-in {
+    animation: none;
+  }
+
+  * {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
